@@ -8,7 +8,6 @@
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            <!--- hintergrund seite farbe, wo schrifft ist --->
             background-color: #f4f4f4;
         }
         .dropdown {
@@ -17,7 +16,7 @@
             margin: 10px;
         }
         .dropbtn {
-            background-color: #ffcc00;/* Gelb-Orange */
+            background-color: #ffcc00;
             color: black;
             padding: 10px;
             font-size: 16px;
@@ -28,7 +27,7 @@
         .dropdown-content {
             display: none;
             position: absolute;
-            background-color: #fff;/* wei√ü */
+            background-color: #fff;
             min-width: 150px;
             box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
             z-index: 1;
@@ -37,12 +36,18 @@
             padding: 10px;
             text-align: left;
             display: block;
-            background-color: #ddd;/* Hellgrau   */
+            background-color: #ddd;
             cursor: pointer;
         }
         .dropdown-content .option:hover {
-            background-color: #bbb;/* Mittelgrau */
+            background-color: #bbb;
         }
+
+        /* HIER: Dropdown wird beim Hovern ¸ber .dropdown angezeigt */
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
         .links {
             margin-top: 20px;
         }
@@ -63,10 +68,9 @@
     </style>
 </head>
 <body>
-    <h1>Willkommen auf der Startseite</h1>  
-    
+    <h1>Willkommen auf der Startseite</h1>
     <button class="dropbtn" onclick="window.location.href='index.html'">Home</button>
-    <img src="images/moulayB.png" alt="Mein Bild"><br>
+
     <div class="dropdown">
         <button class="dropbtn" onclick="toggleDropdown(1)">Banner 1</button>
         <div class="dropdown-content" id="dropdown1">
@@ -109,12 +113,12 @@
 
     <script>
         function toggleDropdown(dropdownId) {
-            // Alle Dropdowns schlie√üen
+            // Alle Dropdowns schlieﬂen
             for (let i = 1; i <= 4; i++) {
                 document.getElementById("dropdown" + i).style.display = "none";
             }
 
-            // Das ausgew√§hlte Dropdown umschalten
+            // Das ausgew‰hlte Dropdown umschalten
             let dropdown = document.getElementById("dropdown" + dropdownId);
             if (dropdown.style.display === "block") {
                 dropdown.style.display = "none";
@@ -123,7 +127,7 @@
             }
         }
 
-        // Schlie√üen des Dropdowns, wenn au√üerhalb geklickt wird
+        // Schlieﬂen des Dropdowns, wenn auﬂerhalb geklickt wird
         window.onclick = function(event) {
             if (!event.target.matches('.dropbtn')) {
                 let dropdowns = document.getElementsByClassName("dropdown-content");
