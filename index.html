@@ -28,7 +28,7 @@
         .dropdown-content {
             display: none;
             position: absolute;
-            background-color: #fff;/* weiﬂ */
+            background-color: #fff;/* wei√ü */
             min-width: 150px;
             box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
             z-index: 1;
@@ -108,12 +108,12 @@
 
     <script>
         function toggleDropdown(dropdownId) {
-            // Alle Dropdowns schlieﬂen
+            // Alle Dropdowns schlie√üen
             for (let i = 1; i <= 4; i++) {
                 document.getElementById("dropdown" + i).style.display = "none";
             }
 
-            // Das ausgew‰hlte Dropdown umschalten
+            // Das ausgew√§hlte Dropdown umschalten
             let dropdown = document.getElementById("dropdown" + dropdownId);
             if (dropdown.style.display === "block") {
                 dropdown.style.display = "none";
@@ -122,7 +122,7 @@
             }
         }
 
-        // Schlieﬂen des Dropdowns, wenn auﬂerhalb geklickt wird
+        // Schlie√üen des Dropdowns, wenn au√üerhalb geklickt wird
         window.onclick = function(event) {
             if (!event.target.matches('.dropbtn')) {
                 let dropdowns = document.getElementsByClassName("dropdown-content");
