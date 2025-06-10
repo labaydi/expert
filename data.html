@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formular Beispiel</title>
+</head>
+<body>
+    <h2>Datenformular</h2>
+    <form id="myForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="alter">Alter:</label>
+        <select id="alter" name="alter">
+            <option value="20-25">20-25</option>
+            <option value="25-30">25-30</option>
+        </select><br><br>
+
+        <label for="groesse">Größe:</label>
+        <select id="groesse" name="groesse">
+            <option value="150-160">150-160</option>
+            <option value="160-170">160-170</option>
+        </select><br><br>
+
+        <label for="hautfarbe">Hautfarbe:</label>
+        <select id="hautfarbe" name="hautfarbe">
+            <option value="schwarz">schwarz</option>
+            <option value="weis">weis</option>
+        </select><br><br>
+
+        <label for="gewicht">Gewicht:</label>
+        <select id="gewicht" name="gewicht">
+            <option value="60-70">60-70</option>
+            <option value="70-80">70-80</option>
+        </select><br><br>
+
+        <label for="hobbys">Hobbys:</label>
+        <select id="hobbys" name="hobbys">
+            <option value="reisen">reisen</option>
+            <option value="sport">sport</option>
+        </select><br><br>
+
+        <label for="nationalitaet">Nationalität:</label>
+        <select id="nationalitaet" name="nationalitaet">
+            <option value="deutsch">deutsch</option>
+            <option value="maroc">maroc</option>
+        </select><br><br>
+
+        <button type="submit">Bestätigen</button>
+    </form>
+
+    <h2>Download-Link</h2>
+    <button id="downloadButton" style="display: none;">Download .txt Datei</button>
+
+    <script>
+        // Formularabsendung per JavaScript
+        document.getElementById('myForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+
+            // Dateiinhalt vorbereiten
+            const fileContent = `Name: ${data.name}\nAlter: ${data.alter}\nGröße: ${data.groesse}\nHautfarbe: ${data.hautfarbe}\nGewicht: ${data.gewicht}\nHobbys: ${data.hobbys}\nNationalität: ${data.nationalitaet}\n`;
+
+            // Blob erstellen (Textdatei)
+            const blob = new Blob([fileContent], { type: 'text/plain' });
+
+            // URL für die Blob-Datei generieren
+            const url = URL.createObjectURL(blob);
+
+            // Download-Link aktivieren und anklicken
+            const downloadButton = document.getElementById('downloadButton');
+            downloadButton.style.display = 'inline';  // Den Button sichtbar machen
+            downloadButton.addEventListener('click', function() {
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'formulardaten.txt';  // Der Dateiname
+                a.click(); // Den Download auslösen
+            });
+        });
+    </script>
+</body>
+</html>
