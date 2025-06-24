@@ -43,7 +43,7 @@
             background-color: #bbb;
         }
 
-        /* HIER: Dropdown wird beim Hovern ¸ber .dropdown angezeigt */
+        /* HIER: Dropdown wird beim Hovern √ºber .dropdown angezeigt */
         .dropdown:hover .dropdown-content {
             display: block;
         }
@@ -112,12 +112,12 @@
 
     <script>
         function toggleDropdown(dropdownId) {
-            // Alle Dropdowns schlieﬂen
+            // Alle Dropdowns schlie√üen
             for (let i = 1; i <= 4; i++) {
                 document.getElementById("dropdown" + i).style.display = "none";
             }
 
-            // Das ausgew‰hlte Dropdown umschalten
+            // Das ausgew√§hlte Dropdown umschalten
             let dropdown = document.getElementById("dropdown" + dropdownId);
             if (dropdown.style.display === "block") {
                 dropdown.style.display = "none";
@@ -126,7 +126,7 @@
             }
         }
 
-        // Schlieﬂen des Dropdowns, wenn auﬂerhalb geklickt wird
+        // Schlie√üen des Dropdowns, wenn au√üerhalb geklickt wird
         window.onclick = function(event) {
             if (!event.target.matches('.dropbtn')) {
                 let dropdowns = document.getElementsByClassName("dropdown-content");
@@ -140,5 +140,12 @@
         }
     </script>
     <div>banner1>option1_2</div>
+    <div style="margin-top: 20px; text-align: center;">
+    <h2>Videoaufnahme</h2>
+    <video width="640" height="360" controls>
+      <source src="https://github.com/labaydi/expert/raw/main/videos/Aufnahme_2025_06_24_10_00_14_175.mp4" type="video/mp4">
+      Dein Browser unterst√ºtzt das Video-Tag nicht.
+    </video>
+  </div>
 </body>
 </html>
