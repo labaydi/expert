@@ -43,7 +43,7 @@
             background-color: #bbb;
         }
 
-        /* HIER: Dropdown wird beim Hovern über .dropdown angezeigt */
+        /* HIER: Dropdown wird beim Hovern Ã¼ber .dropdown angezeigt */
         .dropdown:hover .dropdown-content {
             display: block;
         }
@@ -113,12 +113,12 @@
 
     <script>
         function toggleDropdown(dropdownId) {
-            // Alle Dropdowns schließen
+            // Alle Dropdowns schlieÃŸen
             for (let i = 1; i <= 4; i++) {
                 document.getElementById("dropdown" + i).style.display = "none";
             }
 
-            // Das ausgewählte Dropdown umschalten
+            // Das ausgewÃ¤hlte Dropdown umschalten
             let dropdown = document.getElementById("dropdown" + dropdownId);
             if (dropdown.style.display === "block") {
                 dropdown.style.display = "none";
@@ -127,7 +127,7 @@
             }
         }
 
-        // Schließen des Dropdowns, wenn außerhalb geklickt wird
+        // SchlieÃŸen des Dropdowns, wenn auÃŸerhalb geklickt wird
         window.onclick = function(event) {
             if (!event.target.matches('.dropbtn')) {
                 let dropdowns = document.getElementsByClassName("dropdown-content");
@@ -142,3 +142,4 @@
     </script>
 </body>
 </html>
+ 
