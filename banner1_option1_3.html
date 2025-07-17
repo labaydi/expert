@@ -43,7 +43,6 @@
             background-color: #bbb;
         }
 
-        /* HIER: Dropdown wird beim Hovern ¸ber .dropdown angezeigt */
         .dropdown:hover .dropdown-content {
             display: block;
         }
@@ -70,6 +69,8 @@
 <body>
     <h1>Willkommen auf der Startseite</h1>
     <button class="dropbtn" onclick="window.location.href='index.html'">Home</button>
+
+    <!-- DROPDOWN BANNER -->
     <div class="dropdown">
         <button class="dropbtn" onclick="toggleDropdown(1)">Banner 1</button>
         <div class="dropdown-content" id="dropdown1">
@@ -79,7 +80,6 @@
             <a href="banner1_option1_4.html" class="option">Option 1.4</a>
         </div>
     </div>
-
     <div class="dropdown">
         <button class="dropbtn" onclick="toggleDropdown(2)">Banner 2</button>
         <div class="dropdown-content" id="dropdown2">
@@ -89,56 +89,62 @@
             <div class="option">Option 2.4</div>
         </div>
     </div>
+<!----------------------------------------------------------------------------------- -->
+    <!-- DATEIKONVERTIERUNG -->
+    <h2>Dateikonvertierung</h2>
+    <form id="uploadForm">
+	  <label for="email">E-Mail-Adresse:</label>
+	  <input type="email" id="email" name="email" required><br><br>
 
-    <div class="dropdown">
-        <button class="dropbtn" onclick="toggleDropdown(3)">Banner 3</button>
-        <div class="dropdown-content" id="dropdown3">
-            <div class="option">Option 3.1</div>
-            <div class="option">Option 3.2</div>
-            <div class="option">Option 3.3</div>
-            <div class="option">Option 3.4</div>
-        </div>
-    </div>
+	  <!-- Deine anderen Felder bleiben wie gehabt -->
+	  <input type="file" id="files" name="files" multiple required><br><br>
 
-    <div class="dropdown">
-        <button class="dropbtn" onclick="toggleDropdown(4)">Banner 4</button>
-        <div class="dropdown-content" id="dropdown4">
-            <div class="option">Option 4.1</div>
-            <div class="option">Option 4.2</div>
-            <div class="option">Option 4.3</div>
-            <div class="option">Option 4.4</div>
-        </div>
-    </div>
+	  <label for="from_format">Von Format:</label>
+	  <select id="from_format" name="from_format" required>
+	    <option value=".ldif">.ldif</option>
+	    <option value=".vcf">.vcf</option>
+	    <option value=".csv">.csv</option>
+	  </select><br><br>
 
-    <script>
-        function toggleDropdown(dropdownId) {
-            // Alle Dropdowns schlieﬂen
-            for (let i = 1; i <= 4; i++) {
-                document.getElementById("dropdown" + i).style.display = "none";
-            }
+	  <label for="to_format">Zu Format:</label>
+	  <select id="to_format" name="to_format" required>
+	    <option value=".ldif">.ldif</option>
+	    <option value=".vcf">.vcf</option>
+	    <option value=".csv">.csv</option>
+	  </select><br><br>
 
-            // Das ausgew‰hlte Dropdown umschalten
-            let dropdown = document.getElementById("dropdown" + dropdownId);
-            if (dropdown.style.display === "block") {
-                dropdown.style.display = "none";
-            } else {
-                dropdown.style.display = "block";
-            }
-        }
+	  <button type="submit">Konvertieren</button>
+	</form>
+	<div id="result"></div>
 
-        // Schlieﬂen des Dropdowns, wenn auﬂerhalb geklickt wird
-        window.onclick = function(event) {
-            if (!event.target.matches('.dropbtn')) {
-                let dropdowns = document.getElementsByClassName("dropdown-content");
-                for (let i = 0; i < dropdowns.length; i++) {
-                    let openDropdown = dropdowns[i];
-                    if (openDropdown.style.display === "block") {
-                        openDropdown.style.display = "none";
-                    }
-                }
-            }
-        }
-    </script>
-    <div>banner1>option1_3</div>
+	<script>
+	document.getElementById('uploadForm').addEventListener('submit', async function (e) {
+	  e.preventDefault();
+
+	  const formData = new FormData();
+	  const files = document.getElementById('files').files;
+	  const email = document.getElementById('email').value;
+	  const fromFormat = document.getElementById('from_format').value;
+	  const toFormat = document.getElementById('to_format').value;
+
+	  formData.append('email', email);
+	  formData.append('from_format', fromFormat);
+	  formData.append('to_format', toFormat);
+
+	  for (let file of files) {
+	    formData.append('files', file);
+	  }
+
+	  const response = await fetch('/convert', {
+	    method: 'POST',
+	    body: formData
+	  });
+
+	  const result = await response.text();
+	  document.getElementById('result').innerText = result;
+	});
+	</script>
+
+
 </body>
 </html>
