@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Startseite</title>
     <style>
         body {
@@ -42,24 +42,20 @@
         .dropdown-content .option:hover {
             background-color: #bbb;
         }
-
         .dropdown:hover .dropdown-content {
             display: block;
         }
-
         .links {
             margin-top: 20px;
         }
         .links a {
             display: block;
-            margin: 5px;
+            margin: 5px auto;
             padding: 10px;
             background-color: #ffcc00;
             color: black;
             text-decoration: none;
             width: 200px;
-            margin-left: auto;
-            margin-right: auto;
         }
         .links a:hover {
             background-color: #ffa500;
@@ -89,97 +85,68 @@
             <div class="option">Option 2.4</div>
         </div>
     </div>
-<!----------------------------------------------------------------------------------- -->
+
     <!-- DATEIKONVERTIERUNG -->
     <h2>Dateikonvertierung</h2>
     <form id="uploadForm">
-	  <label for="email">E-Mail-Adresse:</label>
-	  <input type="email" id="email" name="email" required><br><br>
+        <label for="email">E-Mail-Adresse:</label>
+        <input type="email" id="email" name="email" required /><br /><br />
 
-	  <!-- Deine anderen Felder bleiben wie gehabt -->
-	  <input type="file" id="files" name="files" multiple required><br><br>
+        <input type="file" id="files" name="files" multiple required /><br /><br />
 
-	  <label for="from_format">Von Format:</label>
-	  <select id="from_format" name="from_format" required>
-	    <option value=".ldif">.ldif</option>
-	    <option value=".vcf">.vcf</option>
-	    <option value=".csv">.csv</option>
-	  </select><br><br>
+        <label for="from_format">Von Format:</label>
+        <select id="from_format" name="from_format" required>
+            <option value=".ldif">.ldif</option>
+            <option value=".vcf">.vcf</option>
+            <option value=".csv">.csv</option>
+        </select><br /><br />
 
-	  <label for="to_format">Zu Format:</label>
-	  <select id="to_format" name="to_format" required>
-	    <option value=".ldif">.ldif</option>
-	    <option value=".vcf">.vcf</option>
-	    <option value=".csv">.csv</option>
-	  </select><br><br>
+        <label for="to_format">Zu Format:</label>
+        <select id="to_format" name="to_format" required>
+            <option value=".ldif">.ldif</option>
+            <option value=".vcf">.vcf</option>
+            <option value=".csv">.csv</option>
+        </select><br /><br />
 
-	  <button type="submit">Konvertieren</button>
-	</form>
-	<div id="result"></div>
+        <button type="submit">Konvertieren</button>
+    </form>
+    <div id="result"></div>
 
-	<script>
-	document.getElementById('uploadForm').addEventListener('submit', async function (e) {
-	  e.preventDefault();
+    <script>
+    document.getElementById('uploadForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
 
-	  const formData = new FormData();
-	  const files = document.getElementById('files').files;
-	  const email = document.getElementById('email').value;
-	  const fromFormat = document.getElementById('from_format').value;
-	  const toFormat = document.getElementById('to_format').value;
+      const formData = new FormData();
+      const files = document.getElementById('files').files;
+      const email = document.getElementById('email').value;
+      const fromFormat = document.getElementById('from_format').value;
+      const toFormat = document.getElementById('to_format').value;
 
-	  formData.append('email', email);
-	  formData.append('from_format', fromFormat);
-	  formData.append('to_format', toFormat);
+      formData.append('email', email);
+      formData.append('from_format', fromFormat);
+      formData.append('to_format', toFormat);
 
-	  for (let file of files) {
-	    formData.append('files', file);
-	  }
-	   const response = await fetch('https://convert-04qo.onrender.com/convert', {
-                method: 'POST',
-                body: formData
-           });
-	  const result = await response.text();
-	  document.getElementById('result').innerText = result;
-	});
-	</script>
+      for (let file of files) {
+        formData.append('files', file);
+      }
 
-	<script>
-document.getElementById('uploadForm').addEventListener('submit', async function (e) {
-  e.preventDefault();
+      try {
+        const response = await fetch('https://convert-04qo.onrender.com/convert', {
+          method: 'POST',
+          body: formData
+        });
 
-  const formData = new FormData();
-  const files = document.getElementById('files').files;
-  const email = document.getElementById('email').value;
-  const fromFormat = document.getElementById('from_format').value;
-  const toFormat = document.getElementById('to_format').value;
+        const resultText = await response.text();
 
-  formData.append('email', email);
-  formData.append('from_format', fromFormat);
-  formData.append('to_format', toFormat);
-
-  for (let file of files) {
-    formData.append('files', file);
-  }
-
-  try {
-    const response = await fetch('https://convert-04qo.onrender.com/convert', {
-      method: 'POST',
-      body: formData
+        if (response.ok) {
+          document.getElementById('result').innerText = "Converted and sent to email as zip.";
+        } else {
+          document.getElementById('result').innerText = "Fehler: " + resultText;
+        }
+      } catch (error) {
+        document.getElementById('result').innerText = "Netzwerkfehler: " + error.message;
+      }
     });
-
-    const resultText = await response.text();
-
-    if (response.ok) {
-      document.getElementById('result').innerText = "Converted and sent to email as zip.";
-    } else {
-      document.getElementById('result').innerText = "Fehler: " + resultText;
-    }
-  } catch (error) {
-    document.getElementById('result').innerText = "Netzwerkfehler: " + error.message;
-  }
-});
-</script>
-
-
+    </script>
 </body>
 </html>
